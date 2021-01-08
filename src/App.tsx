@@ -58,7 +58,6 @@ class App extends Component<any, ShowHideComponent> {
                 </div>
                 {room && <Room/>}
                 {showHideStompJs5Example && <StompJsExample/>}
-                <Room/>
             </div>
         );
     }
