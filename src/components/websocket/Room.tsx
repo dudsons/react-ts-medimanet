@@ -2,34 +2,11 @@ import React, {Component} from 'react';
 import {Client} from '@stomp/stompjs';
 import '../../css/Room.css'
 
-// interface IProps {
-//     name: string;
-// }
-//
-// interface IState {
-//     roomStatusColor:String
-// }
-
-// type QuoteProps = {
-//     colour: string
-// }
-
 type QuoteState = {
     currentColour: string,
 }
 
-
 class Room extends Component <any, QuoteState> {
-
-    // constructor(props:IProps) {
-    //         super(props);
-    //
-    //         this.state = {
-    //             roomStatusColor: 'green',
-    //         }
-
-    // this.onClick = this.onClick.bind(this);
-    // }
 
     state: QuoteState = {
         currentColour: 'green',
@@ -53,10 +30,7 @@ class Room extends Component <any, QuoteState> {
                     const messageJSON = JSON.parse(message.body);
 
                     messageFromServerParagraph.innerText = messageJSON.status;
-                    // this.roomStatusHandler(messageJSON.status);
-
-                    // document.getElementById('messages-from-server').appendChild(messageFromServerParagraph);
-
+                    this.changeColor(messageJSON.status);
                     console.log(messageJSON);
 
                 });
@@ -73,34 +47,18 @@ class Room extends Component <any, QuoteState> {
         client.activate();
     }
 
-    changeColor2 = (): string => {
-        return "pink"
 
-    };
-
-    changeColor = (): void => this.setState(state => ({currentColour: this.changeColor2()}));
-
-    // roomStatusHandler = (status: any) => {
-    //     console.log("Room status now is " + status.toString());
-    //     if (status === 'alarm') {
-    //         this.setState({roomStatusColor: 'alarmCssStatus'});
-    //     } else if (status === 'normal') {
-    //         this.setState({roomStatusColor: 'normalCssStatus'});
-    //     }
-    // };
-
-    // onClick(){
-    //     this.setState((previousState, props) => ({
-    //         roomStatusColor: !previousState.toggle,
-    //     }));
-    // }
+     changeColor (status:String): void {
+         if (status === 'alarm') {
+                     this.setState({currentColour: 'alarmCssStatus'});
+                 } else if (status === 'normal') {
+                     this.setState({currentColour: 'normalCssStatus'});
+                 }
+    }
 
     render() {
         let rectangle = this.state.currentColour;
-        // this.state.black === 'green' ? "blackButton" : "whiteButton";
-        // this.setState(rectangle,props)=> {
-        //
-        // }
+
         return (
             <div>
                 <div>
@@ -108,14 +66,9 @@ class Room extends Component <any, QuoteState> {
                 </div>
                 <div id='rectangle'
                      className={rectangle}/>
-                <button onClick={this.changeColor}>Change color</button>
-                <div id='messages-from-server'></div>
             </div>
         );
     }
-
-
-
 }
 
 export default Room
