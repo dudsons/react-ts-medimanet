@@ -18,15 +18,13 @@ class StompJsExample extends Component<any,any>{
                 client.subscribe('/topic/messages', message => {
                     const messageFromServerParagraph = document.createElement('p');
                     messageFromServerParagraph.innerText = message.body;
-                    document.getElementById('messages-from-server')!.appendChild(messageFromServerParagraph);
-                    console.log(message);
+                    if(document.getElementById('messages-from-server')!=null) {
+                        document.getElementById('messages-from-server')!.appendChild(messageFromServerParagraph);
+                    }
+                    console.log(message.body);
                 });
             },
 
-            // Helps during debugging, remove in production
-            debug: (str) => {
-                console.log(new Date(), str);
-            }
         });
 
         client.activate();
