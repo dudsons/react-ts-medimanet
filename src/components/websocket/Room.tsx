@@ -18,7 +18,7 @@ class Room extends Component <any, QuoteState> {
         console.log('Component did mount');
         // The compat mode syntax is totally different, converting to v5 syntax
         // Client is imported from '@stomp/stompjs'
-        var client = new Client();
+        const client = new Client();
 
         client.configure({
             brokerURL: 'ws://127.0.0.1:8080/chat',

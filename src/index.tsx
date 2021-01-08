@@ -11,7 +11,6 @@ import {
     NormalizedCacheObject
 } from '@apollo/client';
 import {cache} from "./cash";
-import QuoteApp from "./tests/QuoteApp";
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
     cache,
