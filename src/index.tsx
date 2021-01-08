@@ -30,8 +30,23 @@ client
         }
     `
 })
+
 .then(result => console.log(result));
 
+
+client
+.query({
+    query: gql`
+        query TestQuery {
+            getMovies(limit:10){
+                id,
+                author
+            }
+        }
+    `
+})
+
+.then(result => console.log(result));
 
 const randomQuotes: string[] = [
     "Before you judge a man, walk a mile in his shoes. After that who cares?... He’s a mile away and you’ve got his shoes!",

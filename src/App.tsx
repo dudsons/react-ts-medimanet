@@ -4,28 +4,23 @@ import './App.css'
 // import ReactStompExample from "./components/examples/ReactStompExample";
 import Room from "./components/websocket/Room";
 import StompJsExample from "./components/tests/StompJsExample";
+import UserRegisterGraphql from "./components/graphql/UserRegisterGraphql";
+import GraphqlTest from "./components/tests/GraphqlTest";
 // import TestButton from "./components/medimanet/TestButton";
 
 type ShowHideComponent = {
-    room: boolean,
+    showRoom: boolean,
     showHideStompJs5Example: boolean,
+    showGraphqlTest: boolean,
 }
 
 
 class App extends Component<any, ShowHideComponent> {
 
-    // constructor() {
-    //   super();
-    //   this.state = {
-    //     name: "React",
-    //     showHideStompJs5Example: false,
-    //     showHideReactStompExample: false,
-    //   };
-    // }
-
     state: ShowHideComponent = {
-        room: false,
-        showHideStompJs5Example: false
+        showRoom: false,
+        showHideStompJs5Example: false,
+        showGraphqlTest: false
     };
 
     hideComponent(name: string) {
@@ -33,10 +28,17 @@ class App extends Component<any, ShowHideComponent> {
         switch (name) {
             case "showHideStompJs5Example":
                 this.setState({showHideStompJs5Example: !this.state.showHideStompJs5Example});
-                this.setState({room: false});
+                this.setState({showRoom: false});
+                this.setState({showGraphqlTest: false});
                 break;
-            case "room":
-                this.setState({room: !this.state.room});
+            case "showRoom":
+                this.setState({showRoom: !this.state.showRoom});
+                this.setState({showHideStompJs5Example: false});
+                this.setState({showGraphqlTest: false});
+                break;
+            case "showGraphqlTest":
+                this.setState({showGraphqlTest: !this.state.showGraphqlTest});
+                this.setState({showRoom: false});
                 this.setState({showHideStompJs5Example: false});
                 break;
             default:
@@ -45,19 +47,23 @@ class App extends Component<any, ShowHideComponent> {
     }
 
     render() {
-        const {showHideStompJs5Example, room} = this.state;
+        const {showHideStompJs5Example, showRoom, showGraphqlTest} = this.state;
         return (
             <div>
                 <div>
                     <button onClick={() => this.hideComponent("showHideStompJs5Example")}>
                         Click to show StompJs5Example component
                     </button>
-                    <button onClick={() => this.hideComponent("room")}>
+                    <button onClick={() => this.hideComponent("showRoom")}>
                         Click to show Room component
                     </button>
+                    <button onClick={() => this.hideComponent("showGraphqlTest")}>
+                        Click to show GraphqlTest
+                    </button>
                 </div>
-                {room && <Room/>}
+                {showRoom && <Room/>}
                 {showHideStompJs5Example && <StompJsExample/>}
+                {showGraphqlTest && <GraphqlTest/>}
             </div>
         );
     }

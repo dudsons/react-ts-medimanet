@@ -6,7 +6,7 @@ type QuoteState = {
     currentColour: string,
 }
 
-class Room extends Component <any, QuoteState> {
+export default class Room extends Component <any, QuoteState> {
 
     state: QuoteState = {
         currentColour: 'green',
@@ -71,4 +71,3 @@ class Room extends Component <any, QuoteState> {
     }
 }
 
-export default Room
