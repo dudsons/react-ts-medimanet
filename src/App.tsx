@@ -6,6 +6,7 @@ import Room from "./components/websocket/Room";
 import StompJsExample from "./components/tests/StompJsExample";
 import UserRegisterGraphql from "./components/graphql/UserRegisterGraphql";
 import GraphqlTest from "./components/tests/GraphqlTest";
+import GraphqlHookTest from "./components/tests/GraphqlHookTest";
 // import TestButton from "./components/medimanet/TestButton";
 
 type ShowHideComponent = {
@@ -64,6 +65,7 @@ class App extends Component<any, ShowHideComponent> {
                 {showRoom && <Room/>}
                 {showHideStompJs5Example && <StompJsExample/>}
                 {showGraphqlTest && <GraphqlTest/>}
+                <GraphqlHookTest/>
             </div>
         );
     }
