@@ -1,26 +1,15 @@
 import React, {useState} from 'react';
 import '../../css/Room.css'
-import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
-import {InMemoryCache, useMutation} from '@apollo/client';
-import { ApolloProvider } from '@apollo/react-hooks';
+import {useMutation} from '@apollo/client';
+import GqlQueries from "../graphql/graphqlQueries/GqlQueries";
 
-const client = new ApolloClient({
-    uri: 'http://localhost:8080/graphql'
-});
 
-const ADD_MOVIES = gql`
-    mutation AddMovie($author: String!, $url:String){
-        addMovie(author: $author, url: $url){
-            author,
-            url
-        }
-    }`;
 
 function GraphqlHookTest () {
     const [author, setAuthor] = React.useState("");
     const [url, setUrl] = React.useState("");
-    const [addMovie, {loading, error}]  = useMutation(ADD_MOVIES);
+    const [addMovie, {loading, error}]  = useMutation(GqlQueries.);
 
     function handleAddmovie(event:any) {
         event.preventDefault();
@@ -44,5 +33,14 @@ function GraphqlHookTest () {
         </div>
     );
 }
+
+const ADD_MOVIES = gql`
+    mutation AddMovie($author: String!, $url:String){
+        addMovie(author: $author, url: $url){
+            author,
+            url
+        }
+    }`;
+
 
 export default GraphqlHookTest;

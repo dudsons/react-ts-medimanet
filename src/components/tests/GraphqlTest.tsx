@@ -1,23 +1,15 @@
 import React, {Component} from 'react';
-import {Client} from '@stomp/stompjs';
 import '../../css/Room.css'
 import {
     ApolloClient,
     gql,
-    useMutation,
     NormalizedCacheObject
 } from '@apollo/client';
 import {cache} from "../../cash";
 import './GraphqlHookTest';
 
-interface Movie {
-    id:number,
-    author:string,
-    url:string
-}
 
 interface IProps {
-
 }
 
 interface Movie {
@@ -29,8 +21,6 @@ interface Movie {
 interface Movies {
     movies:Movie[]
 }
-
-
 
 
 export default class GraphqlTest extends Component <IProps, Movies> {
@@ -82,8 +72,6 @@ export default class GraphqlTest extends Component <IProps, Movies> {
 
     addMovieToDb2(e:any){
         e.preventDefault();
-        // const author2:string = (document.getElementById('author')as HTMLInputElement).value;
-        // const url2:string = (document.getElementById('url')as HTMLInputElement).value;
         this.client.mutate({
             mutation: this.ADD_MOVIES,
             variables: {author:this.author2, url:this.url2},
@@ -92,29 +80,7 @@ export default class GraphqlTest extends Component <IProps, Movies> {
             .catch((err) => console.error(err));
 
     }
-    // addMovieToDb() {
-    //     // e.preventDefault();
-    //     if(document.getElementById('author') != null ||
-    //         document.getElementById('url') != null) {
-    //         const author2:string = (document.getElementById('author')as HTMLInputElement).value;
-    //         const url2:string = (document.getElementById('url')as HTMLInputElement).value;
-    //         console.log(`author to save: `+ author2 + ' url: ' + url2);
-    //     }
-    //
-    //     this.client
-    //     .mutate({
-    //     mutation: gql`
-    //             mutation TestQuery2 {
-    //                 addMovie(author:author2,url: url2){
-    //                     id,
-    //                     author
-    //                 }
-    //             }
-    //         `
-    //     })
-    //
-    //     .then(result => console.log(result));
-    // }
+
     render() {
             return (
             <div>
