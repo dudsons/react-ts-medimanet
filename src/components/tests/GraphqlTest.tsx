@@ -6,7 +6,7 @@ import {
     NormalizedCacheObject
 } from '@apollo/client';
 import {cache} from "../../cash";
-import './GraphqlHookTest';
+import MovieFromDbHooksGql from "../../App";
 
 
 interface IProps {
@@ -37,6 +37,13 @@ export default class GraphqlTest extends Component <IProps, Movies> {
         uri: 'http://localhost:8080/graphql'
     });
 
+    ADD_MOVIES = gql`
+        mutation AddMovie($author: String!, $url:String){
+            addMovie(author: $author, url: $url){
+                author,
+                url
+            }
+        }`;
 
     getMoviesFromServer() {
         this.client
@@ -55,23 +62,9 @@ export default class GraphqlTest extends Component <IProps, Movies> {
             this.setState({
                 movies:result.data.getMovies
             })
-
         });
     }
 
-    author2:string = "xxxx";
-    url2:string = "yyyyy";
-
-    addMovieToDb2(e:any){
-        e.preventDefault();
-        this.client.mutate({
-            mutation: this.ADD_MOVIES,
-            variables: {author:this.author2, url:this.url2},
-        })
-            .then((response) => console.log(response.data))
-            .catch((err) => console.error(err));
-
-    }
 
     render() {
             return (
@@ -89,13 +82,7 @@ export default class GraphqlTest extends Component <IProps, Movies> {
     }
 
 
-    ADD_MOVIES = gql`
-        mutation AddMovie($author: String!, $url:String){
-            addMovie(author: $author, url: $url){
-                author,
-                url
-            }
-        }`;
+
 
 }
 

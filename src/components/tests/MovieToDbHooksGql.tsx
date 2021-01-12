@@ -4,8 +4,7 @@ import gql from "graphql-tag";
 import {useMutation} from '@apollo/client';
 
 
-
-function GraphqlHookTest () {
+function MovieToDbHooksGql () {
     const [author, setAuthor] = React.useState("");
     const [url, setUrl] = React.useState("");
     const [addMovie, {loading, error}]  = useMutation(ADD_MOVIES);
@@ -42,4 +41,4 @@ const ADD_MOVIES = gql`
     }`;
 
 
-export default GraphqlHookTest;
+export default MovieToDbHooksGql;

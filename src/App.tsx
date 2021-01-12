@@ -3,7 +3,8 @@ import './App.css'
 import Room from "./components/websocket/Room";
 import StompJsExample from "./components/tests/StompJsExample";
 import GraphqlTest from "./components/tests/GraphqlTest";
-import GraphqlHookTest from "./components/tests/GraphqlHookTest";
+import MovieToDbHooksGql from "./components/tests/MovieToDbHooksGql";
+import MovieFromDbHooksGql from "./components/tests/MovieFromDbHooksGql";
 
 type ShowHideComponent = {
     showRoom: boolean,
@@ -61,7 +62,8 @@ class App extends Component<any, ShowHideComponent> {
                 {showRoom && <Room/>}
                 {showHideStompJs5Example && <StompJsExample/>}
                 {showGraphqlTest && <GraphqlTest/>}
-                <GraphqlHookTest/>
+                <MovieToDbHooksGql/>
+                <MovieFromDbHooksGql/>
             </div>
         );
     }
