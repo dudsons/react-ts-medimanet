@@ -2,14 +2,13 @@ import React, {useState} from 'react';
 import '../../css/Room.css'
 import gql from "graphql-tag";
 import {useMutation} from '@apollo/client';
-import GqlQueries from "../graphql/graphqlQueries/GqlQueries";
 
 
 
 function GraphqlHookTest () {
     const [author, setAuthor] = React.useState("");
     const [url, setUrl] = React.useState("");
-    const [addMovie, {loading, error}]  = useMutation(GqlQueries.);
+    const [addMovie, {loading, error}]  = useMutation(ADD_MOVIES);
 
     function handleAddmovie(event:any) {
         event.preventDefault();
@@ -21,10 +20,10 @@ function GraphqlHookTest () {
 
     return (
         <div>
-            <h1>New Post</h1>
+            <h1>Add movie to db</h1>
             <form onSubmit={handleAddmovie}>
-                <input onChange={(event) => setAuthor(event.target.value)} />
-                <textarea onChange={(event) => setUrl(event.target.value)} />
+                <label>Add author</label><input onChange={(event) => setAuthor(event.target.value)} />
+                <label>Add url</label><input onChange={(event) => setUrl(event.target.value)} />
                 <button disabled={loading} type="submit">
                     Submit
                 </button>

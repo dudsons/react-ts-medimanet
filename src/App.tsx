@@ -1,13 +1,9 @@
 import React, {Component} from 'react'
 import './App.css'
-// import StompJs5Example from "./components/examples/StompJs5Example";
-// import ReactStompExample from "./components/examples/ReactStompExample";
 import Room from "./components/websocket/Room";
 import StompJsExample from "./components/tests/StompJsExample";
-import UserRegisterGraphql from "./components/graphql/UserRegisterGraphql";
 import GraphqlTest from "./components/tests/GraphqlTest";
 import GraphqlHookTest from "./components/tests/GraphqlHookTest";
-// import TestButton from "./components/medimanet/TestButton";
 
 type ShowHideComponent = {
     showRoom: boolean,

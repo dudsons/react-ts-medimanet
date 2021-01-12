@@ -15,7 +15,6 @@ ReactDOM.render(
     <React.StrictMode>
         <ApolloProvider client={client}>
         <App/>
-        {/*<QuoteApp quotes={randomQuotes}/>*/}
         </ApolloProvider>
     </React.StrictMode>,
     document.getElementById('root')

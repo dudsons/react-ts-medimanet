@@ -32,14 +32,6 @@ export default class GraphqlTest extends Component <IProps, Movies> {
         }
     }
 
-     ADD_MOVIES = gql`
-        mutation AddMovie($author: String!, $url:String){
-            addMovie(author: $author, url: $url){
-                author,
-                url
-            }
-        }`;
-
     client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
         cache,
         uri: 'http://localhost:8080/graphql'
@@ -88,11 +80,6 @@ export default class GraphqlTest extends Component <IProps, Movies> {
                     <p>Graphql tests buttons</p>
                     <button onClick={()=>this.getMoviesFromServer()}>Graphql Get movies</button>
                 </div>
-                <form>
-                    <label>Add author</label><input type="text" id="author"/>
-                    <label>Add url</label><input type="text" id="url"/>
-                    <button onClick={()=>this.addMovieToDb2}>Add movie to db</button>
-                </form>
                 <p>Films in DB:</p>
                 <div>{this.state.movies.map(function (d,idx){
                     return (<li key={idx}>{d.id},{d.author},{d.url}</li>)
@@ -101,6 +88,14 @@ export default class GraphqlTest extends Component <IProps, Movies> {
         );
     }
 
+
+    ADD_MOVIES = gql`
+        mutation AddMovie($author: String!, $url:String){
+            addMovie(author: $author, url: $url){
+                author,
+                url
+            }
+        }`;
 
 }
 
