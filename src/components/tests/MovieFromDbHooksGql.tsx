@@ -1,29 +1,40 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import '../../css/Room.css'
 import gql from "graphql-tag";
 import {useQuery} from '@apollo/client';
 
 interface IMovie {
-    id:number,
-    author:string,
-    url:string
+    id: number,
+    author: string,
+    url: string
 }
 
 interface IMovies {
-    getMovies:IMovie[]
+    getMovies: IMovie[]
 }
 
 interface IMoviesVars {
-    limit:number;
+    limit: number;
 }
 
-function MovieFromDbHooksGql () {
-    const {error, loading,data} = useQuery<IMovies,IMoviesVars>(GET_MOVIES,{
-       variables : {limit:100}}
-       );
+function MovieFromDbHooksGql() {
+    const {error, loading, data} = useQuery<IMovies, IMoviesVars>(GET_MOVIES, {
+            variables: {limit: 100}
+        }
+    );
+    const [movies, setMovies] = useState<any>();
 
-    if(loading) return <div>Loading...</div>;
-    if(error) return <div>Error can not get movies</div>
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error can not get movies</div>;
+
+
+    function displayMoviesFilm() {
+        let movies = data?.getMovies.map((data, idx) => {
+            return (<li key={idx}>{data.id},{data.author},{data.url}</li>)
+        });
+        setMovies(movies);
+    }
+
 
     return (
         <div>
@@ -31,9 +42,12 @@ function MovieFromDbHooksGql () {
                 <p>Graphql tests buttons</p>
             </div>
             <p>Films in DB:</p>
-            <div>{data?.getMovies.map((data,idx)=>{
-                return(<li key={idx} >{data.id},{data.author},{data.url}</li>)
-            })} </div>
+            <div>
+                <button onClick={displayMoviesFilm}> Get movies list</button>
+                <ul>
+                    {movies}
+                </ul>
+            </div>
         </div>
     );
 }
