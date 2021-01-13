@@ -9,7 +9,7 @@ function MovieToDbHooksGql () {
     const [url, setUrl] = React.useState("");
     const [addMovie, {loading, error}]  = useMutation(ADD_MOVIES);
 
-    function handleAddmovie(event:any) {
+    function handleAddMovie(event:any) {
         event.preventDefault();
         addMovie({variables:{author, url}});
     }
@@ -20,7 +20,7 @@ function MovieToDbHooksGql () {
     return (
         <div>
             <h1>Add movie to db</h1>
-            <form onSubmit={handleAddmovie}>
+            <form onSubmit={handleAddMovie}>
                 <label>Add author</label><input onChange={(event) => setAuthor(event.target.value)} />
                 <label>Add url</label><input onChange={(event) => setUrl(event.target.value)} />
                 <button disabled={loading} type="submit">
