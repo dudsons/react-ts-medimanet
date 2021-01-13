@@ -3,18 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {ApolloClient, NormalizedCacheObject, ApolloProvider} from '@apollo/client';
-import {cache} from "./cash";
+import {ApolloClient, NormalizedCacheObject, ApolloProvider, InMemoryCache} from '@apollo/client';
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-    cache,
+    cache: new InMemoryCache({
+        resultCaching: false,
+        addTypename:false
+    }),
     uri: 'http://localhost:8080/graphql'
 });
 
 ReactDOM.render(
     <React.StrictMode>
         <ApolloProvider client={client}>
-        <App/>
+            <App/>
         </ApolloProvider>
     </React.StrictMode>,
     document.getElementById('root')

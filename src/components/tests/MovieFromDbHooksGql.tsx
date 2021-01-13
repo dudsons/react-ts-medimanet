@@ -19,9 +19,11 @@ interface IMoviesVars {
 
 function MovieFromDbHooksGql() {
     const {error, loading, data} = useQuery<IMovies, IMoviesVars>(GET_MOVIES, {
-            variables: {limit: 100}
+            variables: {limit: 100},
+            fetchPolicy: "network-only"
         }
     );
+
     const [movies, setMovies] = useState<any>();
 
     if (loading) return <div>Loading...</div>;
