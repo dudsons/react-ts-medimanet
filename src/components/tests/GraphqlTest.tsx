@@ -34,7 +34,7 @@ export default class GraphqlTest extends Component <IProps, Movies> {
 
     client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
         cache,
-        uri: 'http://localhost:8080/graphql'
+        uri: 'http://localhost:9000/graphql'
     });
 
     ADD_MOVIES = gql`

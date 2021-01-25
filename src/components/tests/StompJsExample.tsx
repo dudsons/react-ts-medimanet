@@ -11,7 +11,7 @@ class StompJsExample extends Component<any,any>{
         // Client is imported from '@stomp/stompjs'
 
         this.client.configure({
-            brokerURL: 'ws://127.0.0.1:8080/chat',
+            brokerURL: 'ws://127.0.0.1:9000/chat',
             onConnect: () => {
                 console.log('onConnect');
 

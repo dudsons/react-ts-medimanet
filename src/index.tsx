@@ -9,7 +9,7 @@ import {BrowserRouter} from "react-router-dom";
 
 
 const httpLink = createHttpLink({
-        uri: "http://localhost:8080/graphql"
+        uri: "http://localhost:9000/graphql"
     }
 );
 
@@ -32,7 +32,7 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
         resultCaching: false,
         addTypename: false
     }),
-    // uri: 'http://localhost:8080/graphql'
+    // uri: 'http://localhost:9000/graphql'
 });
 
 ReactDOM.render(

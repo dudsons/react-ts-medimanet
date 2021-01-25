@@ -21,7 +21,7 @@ export default class Room extends Component <any, QuoteState> {
         const client = new Client();
 
         client.configure({
-            brokerURL: 'ws://127.0.0.1:8080/chat',
+            brokerURL: 'ws://127.0.0.1:9000/chat',
             onConnect: () => {
                 console.log('onConnect');
 
