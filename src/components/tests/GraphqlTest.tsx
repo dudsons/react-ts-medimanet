@@ -6,7 +6,7 @@ import {
     NormalizedCacheObject
 } from '@apollo/client';
 import {cache} from "../../cash";
-import MovieFromDbHooksGql from "../../App";
+import MovieFromDbHooksGql from "../../App_old";
 
 
 interface IProps {

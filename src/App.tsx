@@ -1,73 +1,102 @@
-import React, {Component} from 'react'
-import './App.css'
-import Room from "./components/websocket/Room";
-import StompJsExample from "./components/tests/StompJsExample";
-import GraphqlTest from "./components/tests/GraphqlTest";
-import MovieToDbHooksGql from "./components/tests/MovieToDbHooksGql";
-import MovieFromDbHooksGql from "./components/tests/MovieFromDbHooksGql";
+import React, {useEffect, useState} from 'react';
+import './App.css';
+import {Link, Switch, Route} from 'react-router-dom'
+import Home from "./security/components/Home";
+import Login from "./security/components/Login";
+import AuthorizationService from "./security/services/auth.service"
+import AdminBoard from "./components/role-based/AdminBoard";
+import ModeratorBoard from "./components/role-based/ModeratorBoard";
+import UserBoard from "./components/role-based/UserBoard";
+import Register from "./security/components/Register";
+import Profile from "./security/components/Profile";
 
-type ShowHideComponent = {
-    showRoom: boolean,
-    showHideStompJs5Example: boolean,
-    showGraphqlTest: boolean,
-}
+function App() {
+    const [showModeratorBoard, setShowModeratorBoard] = useState(false);
+    const [showAdminBoard, setShowAdminBoard] = useState(false);
+    const [currentUser, setCurrentUser] = useState<any>(undefined);
+    const user = AuthorizationService.getCurrentUser();
 
-
-class App extends Component<any, ShowHideComponent> {
-
-    state: ShowHideComponent = {
-        showRoom: false,
-        showHideStompJs5Example: false,
-        showGraphqlTest: false
-    };
-
-    hideComponent(name: string) {
-        console.log(name);
-        switch (name) {
-            case "showHideStompJs5Example":
-                this.setState({showHideStompJs5Example: !this.state.showHideStompJs5Example});
-                this.setState({showRoom: false});
-                this.setState({showGraphqlTest: false});
-                break;
-            case "showRoom":
-                this.setState({showRoom: !this.state.showRoom});
-                this.setState({showHideStompJs5Example: false});
-                this.setState({showGraphqlTest: false});
-                break;
-            case "showGraphqlTest":
-                this.setState({showGraphqlTest: !this.state.showGraphqlTest});
-                this.setState({showRoom: false});
-                this.setState({showHideStompJs5Example: false});
-                break;
-            default:
-            // null;
-        }
+    if (!currentUser  && user) {
+        setCurrentUser(user);
+        setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+        setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
     }
 
-    render() {
-        const {showHideStompJs5Example, showRoom, showGraphqlTest} = this.state;
-        return (
-            <div>
-                <div>
-                    <button onClick={() => this.hideComponent("showHideStompJs5Example")}>
-                        Click to show StompJs5Example component
-                    </button>
-                    <button onClick={() => this.hideComponent("showRoom")}>
-                        Click to show Room component
-                    </button>
-                    <button onClick={() => this.hideComponent("showGraphqlTest")}>
-                        Click to show GraphqlTest
-                    </button>
+
+    const logout = () => {
+        AuthorizationService.logout();
+    }
+
+    return (
+        <div>
+            <nav className="navbar navbar-expand navbar-dark bg-dark ">
+                <Link to={"/"} className="navbar-brand"> bezkoder</Link>
+                <div className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                        <Link to={"/home"} className="nav-link">Home</Link>
+                    </li>
+
+                    {showAdminBoard && (
+                        <li className="nav-item">
+                            <Link to={"/admin"} className="nav-link">Admin</Link>
+                        </li>
+                    )}
+                    {showModeratorBoard && (
+                        <li className="nav-item">
+                            <Link to={"/moderator"} className="nav-link">Moderator</Link>
+                        </li>
+                    )}
+
+                    {currentUser && (
+                        <li className="nav-item">
+                            <Link to={"/profile"}>Current user is : {currentUser.username}</Link>
+                        </li>
+                    )}
                 </div>
-                {showRoom && <Room/>}
-                {showHideStompJs5Example && <StompJsExample/>}
-                {showGraphqlTest && <GraphqlTest/>}
-                <MovieToDbHooksGql/>
-                <MovieFromDbHooksGql/>
-            </div>
-        );
-    }
 
+                {currentUser ? (
+                    <div className="navbar-nav ml-auto">
+                        <li className="nav-item">
+                            <Link to={"/profile"}>{currentUser.username}</Link>
+                        </li>
+                        <li className="nav-item">
+                            <a href={"/login"} onClick={logout}>Logout</a>
+                        </li>
+                    </div>
+                ) : (
+                    <div className="navbar-nav">
+                        <li className="nav-item">
+                            <Link to={"/login"} className="login">Login</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={"/register"} className="register">Register</Link>
+                        </li>
+                    </div>
+
+
+                )
+
+                }
+
+            </nav>
+
+
+            <div className="container mt-3">
+                <Switch>
+                    <Route exact path={["/", "/home"]} component={Home}/>
+                    <Route exact path={"/register"} component={Register}/>
+                    <Route exact path={"/login"} component={Login}/>
+                    <Route exact path={"/profile"} component={Profile}/>
+                    <Route path={"/admin"} component={AdminBoard}/>
+                    <Route path={"/moderator"} component={ModeratorBoard}/>
+                    <Route path={"/user"} component={UserBoard}/>
+                </Switch>
+            </div>
+
+        </div>
+
+
+    );
 }
 
-export default App
+export default App;
