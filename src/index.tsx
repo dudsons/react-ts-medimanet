@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {ApolloClient, createHttpLink, NormalizedCacheObject, ApolloProvider, InMemoryCache} from '@apollo/client';
 import {setContext} from "@apollo/client/link/context";
+import {BrowserRouter} from "react-router-dom";
+
 
 const httpLink = createHttpLink({
         uri: "http://localhost:8080/graphql"
@@ -36,7 +38,9 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
 ReactDOM.render(
     <React.StrictMode>
         <ApolloProvider client={client}>
+            <BrowserRouter>
             <App/>
+            </BrowserRouter>
         </ApolloProvider>
     </React.StrictMode>,
     document.getElementById('root')
