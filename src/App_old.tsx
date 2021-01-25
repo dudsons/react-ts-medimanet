@@ -13,7 +13,7 @@ type ShowHideComponent = {
 }
 
 
-class App extends Component<any, ShowHideComponent> {
+class App_old extends Component<any, ShowHideComponent> {
 
     state: ShowHideComponent = {
         showRoom: false,
@@ -70,4 +70,4 @@ class App extends Component<any, ShowHideComponent> {
 
 }
 
-export default App
+export default App_old
