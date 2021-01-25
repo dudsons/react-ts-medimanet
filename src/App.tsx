@@ -30,7 +30,7 @@ function App() {
     return (
         <div>
             <nav className="navbar navbar-expand navbar-dark bg-dark ">
-                <Link to={"/"} className="navbar-brand"> bezkoder</Link>
+                <Link to={"/"} className="navbar-brand"> Medimanet v..</Link>
                 <div className="navbar-nav mr-auto">
                     <li className="nav-item">
                         <Link to={"/home"} className="nav-link">Home</Link>
@@ -79,7 +79,6 @@ function App() {
                 }
 
             </nav>
-
 
             <div className="container mt-3">
                 <Switch>
