@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {ApolloClient, createHttpLink, NormalizedCacheObject, ApolloProvider, InMemoryCache} from '@apollo/client';
 import {setContext} from "@apollo/client/link/context";
 import {BrowserRouter} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 const httpLink = createHttpLink({
