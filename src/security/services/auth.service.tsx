@@ -13,8 +13,7 @@ const login = (username: string, password: string) => {
         username, password
     }).then((response)=>{
         if(response.data.token){
-
-            localStorage.setItem("user",response.data);
+            localStorage.setItem("user",JSON.stringify(response.data));
         }
         return response.data;
     })
