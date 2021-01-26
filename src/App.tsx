@@ -30,7 +30,7 @@ function App() {
     return (
         <div>
             <nav className="navbar navbar-expand navbar-dark bg-dark ">
-                <Link to={"/"} className="navbar-brand"> Medimanet v..</Link>
+                <Link to={"/"} className="navbar-brand"> React graphql test</Link>
                 <div className="navbar-nav mr-auto">
                     <li className="nav-item">
                         <Link to={"/home"} className="nav-link">Home</Link>
