@@ -9,6 +9,7 @@ import ModeratorBoard from "./components/role-based/ModeratorBoard";
 import UserBoard from "./components/role-based/UserBoard";
 import Register from "./security/components/Register";
 import Profile from "./security/components/Profile";
+import {Checkbox2} from "./mnet_conf/components/Checkbox2";
 
 function App() {
     const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -16,7 +17,7 @@ function App() {
     const [currentUser, setCurrentUser] = useState<any>(undefined);
     const user = AuthorizationService.getCurrentUser();
 
-    if (!currentUser  && user) {
+    if (!currentUser && user) {
         setCurrentUser(user);
         setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
         setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
@@ -30,7 +31,7 @@ function App() {
     return (
         <div>
             <nav className="navbar navbar-expand navbar-dark bg-dark ">
-                <Link to={"/"} className="navbar-brand"> React graphql test</Link>
+                <Link to={"/"} className="navbar-brand"> MedimaNet v.X.YY</Link>
                 <div className="navbar-nav mr-auto">
                     <li className="nav-item">
                         <Link to={"/home"} className="nav-link">Home</Link>
@@ -72,10 +73,7 @@ function App() {
                             <Link to={"/register"} className="register">Register</Link>
                         </li>
                     </div>
-
-
                 )
-
                 }
 
             </nav>
@@ -91,6 +89,9 @@ function App() {
                     <Route path={"/user"} component={UserBoard}/>
                 </Switch>
             </div>
+            <Checkbox2 onChange={value => {
+                console.log("I changed")
+            }}/>
 
         </div>
 

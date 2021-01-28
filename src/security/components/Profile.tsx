@@ -1,5 +1,7 @@
 import React from "react";
 import AuthService from "../services/auth.service";
+import Room from "../../components/websocket/Room";
+import MovieFromDbHooksGql from "../../components/tests/MovieFromDbHooksGql";
 
 const Profile = () => {
     const currentUser = AuthService.getCurrentUser();
@@ -26,6 +28,8 @@ const Profile = () => {
                 {currentUser.roles &&
                 currentUser.roles.map((role:string, index:number) => <li key={index}>{role}</li>)}
             </ul>
+            {/*<Room/>*/}
+            {/*<MovieFromDbHooksGql/>*/}
         </div>
     );
 };

@@ -62,7 +62,7 @@ export default class Room extends Component <any, QuoteState> {
         return (
             <div>
                 <div>
-                    <p>MedimaNet Room </p>
+                    <p>MedimaNet Room - webSocket connection </p>
                 </div>
                 <div id='rectangle'
                      className={rectangle}/>

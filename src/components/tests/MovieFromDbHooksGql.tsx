@@ -27,7 +27,7 @@ function MovieFromDbHooksGql() {
     const [movies, setMovies] = useState<any>();
 
     if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error can not get movies</div>;
+    if (error) return <div>Error can not get movies: {error.message}</div>;
 
 
     function displayMoviesFilm() {
