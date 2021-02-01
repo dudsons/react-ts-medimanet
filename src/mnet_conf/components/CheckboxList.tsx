@@ -17,11 +17,12 @@ export const CheckboxList: React.FunctionComponent<IProps> = ({   children,
     const [conf, setConfigs] = useState<IConfiguration[]>();
 
     let configuration = {
-        configurationName: 'showDays',
+        configurationName: 'showTime',
         activate: 'false'
     }
 
-    async function submit() {
+    async function submit(e:any,text:string) {
+        console.log(text);
         let setConfigurations = await fetch("http://localhost:9000/api/conf/activate", {
             method: 'POST',
             headers: {
@@ -49,8 +50,10 @@ export const CheckboxList: React.FunctionComponent<IProps> = ({   children,
             <span>MedimaNet configurations (example):</span>
             <div>
                 {conf?.map((con) => <div>
-                    <span>{con.name} </span>
-                    <input onChange={async e => onChange(true, await submit())} {...shared}/>
+                    <label>
+                    <input onChange={async e => onChange(true, await submit(e,con.name))} value={"con.name"}{...shared} />
+                        {con.name}
+                    </label>
                 </div>)}
             </div>
         </div>
