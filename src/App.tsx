@@ -9,7 +9,7 @@ import ModeratorBoard from "./components/role-based/ModeratorBoard";
 import UserBoard from "./components/role-based/UserBoard";
 import Register from "./security/components/Register";
 import Profile from "./security/components/Profile";
-import {Checkbox2} from "./mnet_conf/components/Checkbox2";
+import {CheckboxList} from "./mnet_conf/components/CheckboxList";
 
 function App() {
     const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -22,7 +22,6 @@ function App() {
         setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
         setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
     }
-
 
     const logout = () => {
         AuthorizationService.logout();
@@ -89,10 +88,7 @@ function App() {
                     <Route path={"/user"} component={UserBoard}/>
                 </Switch>
             </div>
-            <Checkbox2 onChange={value => {
-                console.log("I changed")
-            }}/>
-
+            <CheckboxList onChange={()=>{console.log(``);}}></CheckboxList>
         </div>
 
 
