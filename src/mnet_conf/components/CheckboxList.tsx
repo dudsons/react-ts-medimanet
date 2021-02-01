@@ -7,7 +7,6 @@ interface IProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onCh
 }
 
 interface IConfiguration {
-    id: number,
     name: string,
     activateConfiguration: boolean
 }
@@ -16,13 +15,14 @@ export const CheckboxList: React.FunctionComponent<IProps> = ({   children,
                                                                    onChange, ...shared}) => {
     const [conf, setConfigs] = useState<IConfiguration[]>();
 
-    let configuration = {
-        configurationName: 'showTime',
-        activate: 'false'
-    }
 
-    async function submit(e:any,text:string) {
-        console.log(text);
+    async function submit(isChecked:boolean,text:string) {
+        // set configuration object
+        let configuration:IConfiguration = {
+            name :  text,
+            activateConfiguration : isChecked
+        }
+
         let setConfigurations = await fetch("http://localhost:9000/api/conf/activate", {
             method: 'POST',
             headers: {
@@ -51,7 +51,7 @@ export const CheckboxList: React.FunctionComponent<IProps> = ({   children,
             <div>
                 {conf?.map((con) => <div>
                     <label>
-                    <input onChange={async e => onChange(true, await submit(e,con.name))} value={"con.name"}{...shared} />
+                    <input onChange={async e => onChange(true, await submit(e.target.checked, con.name))} value={"con.name"}{...shared} />
                         {con.name}
                     </label>
                 </div>)}
